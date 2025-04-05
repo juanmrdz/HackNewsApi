@@ -17,7 +17,7 @@ namespace HackNewsApi.Controllers
         public async Task<IActionResult> GetTopStories (int count)
         {
             if (count < 1 || count > 500)
-                return BadRequest("Count must be between 1 and 500");
+                return BadRequest("Cantidad debe estar entre 1 y 500");
             var stories = await _service.GetTopStoriesAsync(count);
             return Ok(stories);
         }

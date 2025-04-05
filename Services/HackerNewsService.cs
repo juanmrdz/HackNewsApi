@@ -25,11 +25,11 @@
             var storyIds = await _httpClient.GetFromJsonAsync<List<int>?>("https://hacker-news.firebaseio.com/v0/beststories.json");
 
             var topIds = storyIds.Take(500);  // limitar a 500
-            var tasks = topIds.Select(id => GetStoryById(id));
+            var tasks = topIds.Select(id => GetStoryById(id));   //detalle de historia por id
             var stories = await Task.WhenAll(tasks);
             var topN = stories
             .Where(s => s != null)
-            .OrderByDescending(s => s.Score)
+            .OrderByDescending(s => s.Score)  // en orden descendente por score
             .Take(count)
             .ToList();
             _memoryCache.Set(cacheKey, topN, TimeSpan.FromMinutes(5));
